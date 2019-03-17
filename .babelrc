@@ -5,9 +5,5 @@
 		"stage-0"
 		// "@babel/preset-react"
 	],
-	"plugins": [
-		"react-hot-loader/babel",
-		"transform-runtime"
-		// "@babel/plugin-syntax-dynamic-import"
-	]
+	"plugins": ["react-hot-loader/babel", "transform-runtime", "syntax-dynamic-import"]
 }

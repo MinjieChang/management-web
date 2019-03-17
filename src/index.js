@@ -1,23 +1,21 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
-import getRouter from 'router/router'
+// import getRouter from 'router/router1/router'
+import getRouter from 'router/router2'
 import { Provider } from 'react-redux'
+import 'babel-polyfill'
+// import 'antd/dist/antd.css'
+import './less/app.css'
 import store from './redux/store'
-
-// ReactDom.render(getRouter(), document.getElementById('app'))
-
-// if (module.hot) {
-// 	module.hot.accept()
-// }
 
 /*初始化*/
 renderWithHotReload(getRouter())
 
 /*热更新*/
 if (module.hot) {
-	module.hot.accept('./router/router', () => {
-		const getRouter = require('./router/router').default
+	module.hot.accept('./router/router2', () => {
+		const getRouter = require('./router/router2').default
 		renderWithHotReload(getRouter())
 	})
 }
@@ -25,7 +23,7 @@ if (module.hot) {
 function renderWithHotReload(RootElement) {
 	ReactDom.render(
 		<AppContainer>
-			<Provider store={store}>{RootElement} </Provider>
+			<Provider store={store}>{RootElement}</Provider>
 		</AppContainer>,
 		document.getElementById('app')
 	)

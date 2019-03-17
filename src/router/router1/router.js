@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 
 import Bundle from './Bundle'
 
+// 这种动态加载比较麻烦的就是这种写法
 import Home from 'bundle-loader?lazy&name=home!pages/Home/Home'
 import Page1 from 'bundle-loader?lazy&name=page1!pages/Page1/Page1'
 import Counter from 'bundle-loader?lazy&name=page1!pages/Counter/Counter'
@@ -24,7 +25,7 @@ const getRouter = () => (
 		<div>
 			<ul>
 				<li>
-					<Link to="/">首页</Link>
+					<Link to="/">首页3333</Link>
 				</li>
 				<li>
 					<Link to="/page1">Page</Link>

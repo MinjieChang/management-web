@@ -1,0 +1,44 @@
+@import '../../less/layout';
+@import '../../less/color';
+
+.root {
+	height: 100%;
+	.layoutRow;
+	.menu {
+		width: 200px;
+		.layoutColumn;
+		.flex0;
+		.productName {
+			.layoutColumn;
+			.centerCenter;
+			height: 80px;
+			background: #ccc;
+		}
+	}
+	.content {
+		.flex1;
+		.layoutColumn;
+		overflow: auto;
+		overflow-y: hidden;
+		background: @themeBg;
+		.contentHeader {
+			height: 80px;
+			.flex0;
+		}
+		.contentContainer {
+			.flex1;
+			.layoutColumn;
+			.startCenter;
+			min-width: 1040px;
+			padding: 20px;
+			.childContent {
+				.flex1;
+				width: 1040px;
+				background: @themeBg;
+			}
+		}
+	}
+}
+.title {
+	color: red;
+}

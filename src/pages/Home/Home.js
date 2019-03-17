@@ -8,6 +8,22 @@ export default class Home extends Component {
 		}
 	}
 
+	componentDidMount() {
+		this.setState({ count: this.state.count + 1 })
+		console.log(this.state.count, '1')
+
+		this.setState({ count: this.state.count + 1 })
+		console.log(this.state.count, '2')
+
+		setTimeout(() => {
+			this.setState({ count: this.state.count + 1 })
+			console.log(this.state.count, '3')
+
+			this.setState({ count: this.state.count + 1 })
+			console.log(this.state.count, '4')
+		}, 0)
+	}
+
 	_handleClick() {
 		this.setState({
 			count: ++this.state.count
@@ -15,13 +31,14 @@ export default class Home extends Component {
 	}
 
 	render() {
+		console.log(this.state.count, 'render')
 		return (
 			<div>
-				this is home~88889999666
+				this is home558
 				<br />
 				当前计数：{this.state.count}
 				<br />
-				<button onClick={() => this._handleClick()}>自增</button>
+				<button onClick={() => this._handleClick()}>自增======</button>
 			</div>
 		)
 	}

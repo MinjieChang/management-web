@@ -1,10 +1,11 @@
-
-html, body, :global(#root) {
-  height: 100%;
-  overflow: hidden;
-  font-family: 'PingFang SC', 'Microsoft YaHei UI', serif;
-  font-size: 14px;
+html,
+body,
+:global(#app) {
+	height: 100%;
+	overflow: hidden;
+	font-family: 'PingFang SC', 'Microsoft YaHei UI', serif;
+	font-size: 14px;
 }
 :global(div) {
-  box-sizing: content-box;
+	box-sizing: content-box;
 }

@@ -6,7 +6,7 @@ export default class Page1 extends Component {
 	render() {
 		return (
 			<div className={s.page}>
-				this is Page15566899~
+				this is Page1558996666~
 				<img src={image} />
 			</div>
 		)

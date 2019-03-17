@@ -5,8 +5,8 @@ export default store => next => action => {
 	/*如果dispatch来的是一个function，此处不做处理，直接进入下一级*/
 	// 类似redux-thunk的做法
 	if (typeof action === 'function') {
-		action(dispatch, getState)
-		return
+		// 交给redux-thunk做
+		return next(action)
 	}
 	/*解析action*/
 	const { promise, types, afterSuccess, ...rest } = action
