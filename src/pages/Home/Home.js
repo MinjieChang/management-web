@@ -34,7 +34,7 @@ export default class Home extends Component {
 		console.log(this.state.count, 'render')
 		return (
 			<div>
-				this is home558
+				this is home566
 				<br />
 				当前计数：{this.state.count}
 				<br />

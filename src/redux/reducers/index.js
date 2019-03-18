@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import counter from './counter'
-import userInfo from './userInfo'
+import staff from './staff'
+import loading from './loading'
 
 export default combineReducers({
-	counter,
-	userInfo
+    staff,
+    loading,
 })
