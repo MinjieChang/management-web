@@ -8,16 +8,8 @@ import { Provider } from 'react-redux'
 import './less/app.css'
 import store from './redux/store'
 
-/*初始化*/
+/* 初始化 */
 renderWithHotReload(getRouter())
-
-/*热更新*/
-if (module.hot) {
-    module.hot.accept('./router/router2', () => {
-        const getRouter = require('./router/router2').default
-        renderWithHotReload(getRouter())
-    })
-}
 
 function renderWithHotReload(RootElement) {
     ReactDom.render(
@@ -26,4 +18,12 @@ function renderWithHotReload(RootElement) {
         </AppContainer>,
         document.getElementById('app'),
     )
+}
+
+/* 热更新 */
+if (module.hot) {
+    module.hot.accept('./router/router2', () => {
+        const getRouter = require('./router/router2').default
+        renderWithHotReload(getRouter())
+    })
 }

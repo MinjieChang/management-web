@@ -11,6 +11,7 @@ export const ACTION = {
 export const ENDPOINT = {
     STAFF: {
         GET_STAFF: 'api/staff/getStaffs',
+        ADD_STAFF: 'api/staff/add',
     },
 }
 

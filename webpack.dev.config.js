@@ -2,28 +2,18 @@ const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const commonConfig = require('./webpack.common.config.js')
 const OpenBrowserPlugin = require('open-browser-webpack-plugin')
+const commonConfig = require('./webpack.common.config.js')
 
 const devConfig = {
     devtool: 'inline-source-map',
-    /*入口*/
+    /* 入口 */
     entry: {
-        app: [
-            'babel-polyfill',
-            'react-hot-loader/patch',
-            path.join(__dirname, 'src/index.js'),
-        ],
-        vendor: [
-            'react',
-            'react-router-dom',
-            'redux',
-            'react-dom',
-            'react-redux',
-        ],
+        app: ['babel-polyfill', 'react-hot-loader/patch', path.join(__dirname, 'src/index.js')],
+        vendor: ['react', 'react-router-dom', 'redux', 'react-dom', 'react-redux'],
     },
 
-    /*输出到dist文件夹，输出文件名字为bundle.js*/
+    /* 输出到dist文件夹，输出文件名字为bundle.js */
     output: {
         path: path.join(__dirname, './dist'),
         filename: '[name].[hash].js',
@@ -57,6 +47,12 @@ const devConfig = {
             },
             {
                 test: /\.css$/,
+                /**
+                 * css 不使用modules的原因是
+                 * 1、打包antd的样式时，把antd的样式也打包为css modules 导致antd的样式失效
+                 * 2、将本地的css文件作为全局样式使用，见 less/app.css 使用
+                 * 3、css module 导致错误 'css-loader?modules&localIdentName=[name]-[local]-[hash:base64:5]',
+                 */
                 use: ['style-loader', 'css-loader', 'postcss-loader'],
             },
             {

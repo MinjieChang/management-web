@@ -1,29 +1,24 @@
-import { createStore, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import reducers from '../reducers';
-import promiseMiddleware from './middleware/promiseMiddleware';
-import createFetch from 'src/util/createFetch';
+import { createStore, applyMiddleware } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import { createFetch, ajax } from 'src/util/createFetch'
+import reducers from '../reducers'
+import promiseMiddleware from './middleware/promiseMiddleware'
 
 const clientFetch = createFetch(fetch, {
     getDispatch: () => store.dispatch,
     baseUrl: '',
-});
+})
 
-let store = createStore(
+const store = createStore(
     reducers,
-    applyMiddleware(
-        ...[
-            thunkMiddleware.withExtraArgument({ fetch: clientFetch }),
-            promiseMiddleware,
-        ],
-    ),
-);
+    applyMiddleware(...[thunkMiddleware.withExtraArgument({ fetch: clientFetch, ajax }), promiseMiddleware]),
+)
 
 if (module.hot) {
     module.hot.accept('../reducers', () => {
-        const nextCombineReducers = require('../reducers').default;
-        store.replaceReducer(nextCombineReducers);
-    });
+        const nextCombineReducers = require('../reducers').default
+        store.replaceReducer(nextCombineReducers)
+    })
 }
 
-export default store;
+export default store

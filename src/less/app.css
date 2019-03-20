@@ -11,3 +11,31 @@ body,
 :global(div) {
     box-sizing: content-box;
 }
+/* :global(.mb10) {
+    margin-bottom: 10px;
+} */
+
+.mt10 {
+    margin-top: 10px;
+}
+.mr10 {
+    margin-right: 10px;
+}
+.mb10 {
+    margin-bottom: 10px;
+}
+.ml10 {
+    margin-left: 10px;
+}
+.mt20 {
+    margin-top: 20px;
+}
+.mr20 {
+    margin-right: 20px;
+}
+.mb20 {
+    margin-bottom: 20px;
+}
+.ml20 {
+    margin-left: 20px;
+}

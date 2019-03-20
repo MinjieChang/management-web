@@ -4,6 +4,7 @@ import qs from 'query-string'
 import history from '../history'
 import { sleep } from '../index'
 import { ERROR_MESSAGE, ACTION } from '../../constants'
+import ajax from './ajax'
 
 class ClientError extends Error {
     constructor({ errorCode, errorMessage }) {
@@ -94,4 +95,7 @@ function createFetch(fetch, { baseUrl, cookie, getToken, getDispatch }) {
     }
 }
 
-export default createFetch
+export {
+    createFetch,
+    ajax,
+}

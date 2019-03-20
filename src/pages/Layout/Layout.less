@@ -2,43 +2,52 @@
 @import '../../less/color';
 
 .root {
-	height: 100%;
-	.layoutRow;
-	.menu {
-		width: 200px;
-		.layoutColumn;
-		.flex0;
-		.productName {
-			.layoutColumn;
-			.centerCenter;
-			height: 80px;
-			background: #ccc;
-		}
-	}
-	.content {
-		.flex1;
-		.layoutColumn;
-		overflow: auto;
-		overflow-y: hidden;
-		background: @themeBg;
-		.contentHeader {
-			height: 80px;
-			.flex0;
-		}
-		.contentContainer {
-			.flex1;
-			.layoutColumn;
-			.startCenter;
-			min-width: 1040px;
-			padding: 20px;
-			.childContent {
-				.flex1;
-				width: 1040px;
-				background: @themeBg;
-			}
-		}
-	}
+    height: 100%;
+    .layoutRow;
+    .menu {
+        width: 200px;
+        .layoutColumn;
+        .flex0;
+        .productName {
+            .layoutColumn;
+            .centerCenter;
+            height: 80px;
+            background: #ccc;
+        }
+    }
+    .content {
+        .flex1;
+        .layoutColumn;
+        // overflow: auto;
+        // overflow-y: hidden;
+        overflow-y: auto;
+        overflow-x: auto;
+        background: @themeBg;
+        .contentHeader {
+            height: 80px;
+            .flex0;
+        }
+        .contentContainer {
+            .flex1;
+            .layoutColumn;
+            .startCenter;
+            min-width: 1040px;
+            // overflow-y: auto;
+            // overflow-x: hidden;
+            // padding: 20px;
+            .childContent {
+                .flex1;
+                // .layoutColumn;
+                // .startCenter;
+                width: 1040px;
+                background: #fff;
+                // overflow-y: auto;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+        }
+    }
 }
 .title {
-	color: red;
+    color: red;
 }
