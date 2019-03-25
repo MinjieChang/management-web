@@ -5,6 +5,7 @@ import { AppContainer } from 'react-hot-loader'
 import getRouter from 'router/router2'
 import { Provider } from 'react-redux'
 // import 'antd/dist/antd.css'
+// 作为全局样式
 import './less/app.css'
 import store from './redux/store'
 

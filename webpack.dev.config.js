@@ -1,9 +1,19 @@
 const path = require('path')
+// const fs = require('fs')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OpenBrowserPlugin = require('open-browser-webpack-plugin')
+// const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin')
+// const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const commonConfig = require('./webpack.common.config.js')
+
+// const appDirectory = fs.realpathSync(process.cwd())
+// const resolveApp = relativePath => path.resolve(appDirectory, relativePath)
+
+// const appTsConfig = resolveApp('jsconfig.json')
+// const appSrc = resolveApp('src')
+// const appPackageJson = resolveApp('package.json')
 
 const devConfig = {
     devtool: 'inline-source-map',
@@ -41,7 +51,15 @@ const devConfig = {
                         },
                     },
                     {
-                        loader: 'less-loader', // compiles Less to CSS
+                        loader: 'less-loader',
+                        // options: {
+                        //     modifyVars: {
+                        //         'primary-color': '#1DA57A',
+                        //         'link-color': '#1DA57A',
+                        //         'border-radius-base': '2px',
+                        //     },
+                        //     javascriptEnabled: true,
+                        // }, // compiles Less to CSS
                     },
                 ],
             },
@@ -83,6 +101,9 @@ const devConfig = {
         hot: true,
     },
     resolve: {
+        // modules: ['node_modules'],
+        // modules: [path.join(__dirname, 'src'), 'node_modules'],
+        extensions: ['.js', '.jsx', '.json', '.scss', '.css', '.less'],
         alias: {
             src: path.join(__dirname, 'src'),
             actions: path.join(__dirname, 'src/redux/actions'),
@@ -98,6 +119,7 @@ const devConfig = {
             filename: 'index.html',
             template: path.join(__dirname, 'src/index.html'),
         }),
+        // new webpack.NamedModulesPlugin(),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
         }),
@@ -107,12 +129,4 @@ const devConfig = {
     ],
 }
 module.exports = devConfig
-// module.exports = merge({
-// 	customizeArray(a, b, key) {
-// 		/*entry.app不合并，全替换*/
-// 		if (key === 'entry.app') {
-// 			return b
-// 		}
-// 		return undefined
-// 	}
-// })(commonConfig, devConfig)
+// module.exports = merge(commonConfig, devConfig)

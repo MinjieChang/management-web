@@ -10,6 +10,7 @@
         "transform-runtime",
         "syntax-dynamic-import",
         [
+            // 按需引入antd的样式
             "import",
             { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }
             // "ant"

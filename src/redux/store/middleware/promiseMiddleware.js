@@ -1,4 +1,5 @@
-import axios from 'axios'
+// import axios from 'axios'
+import ajax from 'src/util/createFetch/ajax'
 
 export default store => next => action => {
     const { dispatch, getState } = store
@@ -9,19 +10,18 @@ export default store => next => action => {
         return next(action)
     }
     /* 解析action */
-    const { promise, types, onSuccess, onError, ...rest } = action
+    const { promise, namespace, onSuccess, onError } = action
 
-    /* 没有promise，证明不是想要发送ajax请求的，就直接进入下一步啦！ */
+    /* 没有promise，证明不是想要发送ajax请求的，就直接进入下一步！ */
     if (!action.promise) {
         return next(action)
     }
 
     /* 解析types */
-    const [REQUEST, SUCCESS, FAILURE] = types
+    const [REQUEST, SUCCESS, FAILURE] = [`${namespace}_REQUEST`, `${namespace}_SUCCESS`, `${namespace}_FAILURE`]
 
     /* 开始请求的时候，发一个action */
     next({
-        payload: { ...rest },
         type: REQUEST,
     })
     /* 定义请求成功时的方法 */
@@ -30,8 +30,9 @@ export default store => next => action => {
             type: SUCCESS,
         })
         if (onSuccess) {
-            onSuccess(dispatch, getState, result)
+            return onSuccess(dispatch, getState, result)
         }
+        return ''
     }
     /* 定义请求失败时的方法 */
     const onRejected = error => {
@@ -39,11 +40,12 @@ export default store => next => action => {
             type: FAILURE,
         })
         if (onError) {
-            onError(error)
+            return onError(error)
         }
+        return ''
     }
 
-    return promise(axios)
+    return promise(ajax)
         .then(onFulfilled, onRejected)
         .catch(error => {
             console.error('MIDDLEWARE ERROR:', error)

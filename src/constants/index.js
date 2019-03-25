@@ -1,7 +1,8 @@
 export const ACTION = {
     STAFF: {
-        GET_STAFF: 'STAFF/GET_STAFF',
-        SET_STAFF: 'STAFF/SET_STAFF',
+        GET_STAFFS: 'STAFF/GET_STAFFS',
+        SET_STAFFS: 'STAFF/SET_STAFFS',
+        SET_STAFF_INFO: 'STAFF/SET_STAFF_INFO',
     },
     LODING: {
         LODING_STATE: 'LODING/LODING_STATE',
@@ -10,8 +11,12 @@ export const ACTION = {
 
 export const ENDPOINT = {
     STAFF: {
-        GET_STAFF: 'api/staff/getStaffs',
+        GET_STAFFS: 'api/staff/getStaffs',
         ADD_STAFF: 'api/staff/add',
+        DEL_STAFF: 'api/staff/del',
+        GET_STAFF_INFO: 'api/staff/getStaffInfo',
+        EDIT_STAFF: 'api/staff/update',
+        BATCH_DELETE_STAFFS: 'api/staff/batchDelByIds',
     },
 }
 

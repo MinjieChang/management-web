@@ -14,7 +14,6 @@ body,
 /* :global(.mb10) {
     margin-bottom: 10px;
 } */
-
 .mt10 {
     margin-top: 10px;
 }
@@ -38,4 +37,23 @@ body,
 }
 .ml20 {
     margin-left: 20px;
+}
+
+.divider {
+    width: 1px;
+    height: 8px;
+    margin: 0 6px;
+    background: #ccc;
+    display: inline-block;
+}
+.pointer {
+    cursor: pointer;
+}
+
+/* 自定义antd颜色 */
+/* .ant-btn {
+    background-color: #1890ff
+} */
+.anticon {
+    color: #1890ff
 }

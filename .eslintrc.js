@@ -1,6 +1,5 @@
 module.exports = {
     parser: 'babel-eslint',
-
     extends: [
         'airbnb',
         'plugin:flowtype/recommended',
@@ -73,6 +72,8 @@ module.exports = {
         // https://github.com/prettier/eslint-plugin-prettier
         'prettier/prettier': 2,
         'linebreak-style': [0, 'error', 'windows'],
+        "jsx-a11y/click-events-have-key-events": 0,
+        "jsx-a11y/no-static-element-interactions": 0
     },
 
     settings: {

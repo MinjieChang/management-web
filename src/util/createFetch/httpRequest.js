@@ -3,30 +3,37 @@ import { message } from 'antd'
 import ClientError from './clientError'
 
 class HttpRequest {
-    constructor(url) {
-        this.url = url
+    constructor() {
         this.time = 10000
     }
 
-    get = () => {
+    get = url => {
         const option = this.setOptions({ method: 'get' })
-        return this.createFetchFn(this.url, option)
+        return this.createFetchFn(url, option)
     }
 
-    post = body => {
+    post = (url, body) => {
         const option = this.setOptions({
             method: 'post',
             body: isObject(body) ? JSON.stringify(body) : body,
         })
-        return this.createFetchFn(this.url, option)
+        return this.createFetchFn(url, option)
     }
 
-    put = body => {
+    delete = (url, body) => {
+        const option = this.setOptions({
+            method: 'delete',
+            body: isObject(body) ? JSON.stringify(body) : body,
+        })
+        return this.createFetchFn(url, option)
+    }
+
+    put = (url, body) => {
         const option = this.setOptions({
             method: 'put',
             body: isObject(body) ? JSON.stringify(body) : body,
         })
-        return this.createFetchFn(this.url, option)
+        return this.createFetchFn(url, option)
     }
 
     setOptions = (option, baseUrl = '') => {
@@ -75,6 +82,7 @@ class HttpRequest {
         }).catch(error => {
             console.log(error.errorCode, 'error----errorCode----')
             console.log(error instanceof ClientError, 'error888888')
+            message.error(error.errorCode)
             if (error instanceof ClientError) {
                 return {
                     errorCode: error.errorCode,
@@ -86,7 +94,7 @@ class HttpRequest {
     }
 }
 
-export default HttpRequest
+export default new HttpRequest()
 
 /**
  *  {
