@@ -93,7 +93,7 @@ const devConfig = {
         proxy: {
             '/api': {
                 target: 'http://localhost:8000',
-                pathRewrite: { '^/api': '' },
+                pathRewrite: { '^/api': '/api' },
                 changeOrigin: true,
             },
         },

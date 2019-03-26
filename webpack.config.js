@@ -52,7 +52,7 @@ const publicConfig = {
                 // 将css打包到一个文件中
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
-                    use: ['css-loader?modules&localIdentName=[name]-[local]-[hash:base64:5]', 'postcss-loader'],
+                    use: ['css-loader', 'postcss-loader'],
                 }),
             },
             // {
