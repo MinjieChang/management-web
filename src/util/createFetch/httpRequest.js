@@ -1,5 +1,6 @@
 import isObject from 'lodash/isObject'
 import { message } from 'antd'
+import { ERROR_MESSAGE } from 'src/constants/index'
 import ClientError from './clientError'
 
 class HttpRequest {
@@ -67,6 +68,7 @@ class HttpRequest {
         if (hasAuth) {
             message.warning('登录无效')
         }
+        // TODO 此处需要重定向到登陆页
         return response
     }
 
@@ -78,11 +80,9 @@ class HttpRequest {
                 .then(response => response.json())
                 .then(response => this.checkAuthority(response))
                 .then(response => resolve(response))
-                .catch(err => () => reject(err))
+                .catch(err => reject(err))
         }).catch(error => {
-            console.log(error.errorCode, 'error----errorCode----')
-            console.log(error instanceof ClientError, 'error888888')
-            message.error(error.errorCode)
+            message.error(ERROR_MESSAGE[error.errorCode || 'UNKNOWN'])
             if (error instanceof ClientError) {
                 return {
                     errorCode: error.errorCode,
@@ -95,16 +95,3 @@ class HttpRequest {
 }
 
 export default new HttpRequest()
-
-/**
- *  {
-        method: 'POST', // handy with GraphQL backends
-        mode: baseUrl ? 'cors' : 'same-origin',
-        credentials: baseUrl ? 'include' : 'same-origin',
-        body: isObject(body) ? JSON.stringify(body) : body,
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            ...(cookie ? { Cookie: cookie } : null),
-        },
-  */

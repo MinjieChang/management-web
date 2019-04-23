@@ -30,3 +30,12 @@ export function sleep(time) {
         setTimeout(() => resolve(), time)
     })
 }
+
+export function inherits(Child, Father) {
+    function Middle() {}
+    Middle.prototype = Father.prototype
+    const midInstance = new Middle()
+    /* eslint-disable-next-line */
+    Child.prototype = midInstance
+    midInstance.constructor = Child
+}

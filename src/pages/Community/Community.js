@@ -1,27 +1,52 @@
 // redux 开发组件实际在开发类
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { Button } from 'antd'
+import { connect } from 'react-redux'
+import { getTalks as actionGetTalks } from 'src/redux/actions/community'
 
-class ShuoShuo extends React.Component {
-	componentWillReceiveProps(props) {
-		// const talk = props.talk;
-		// this.setState({
-		//   talk,
-		// });
-	}
+const ShuoShuo = ({ getTalks }) => {
+    const [name, setName] = useState('111')
+    const [age, setAge] = useState(20)
+    const [count, setCount] = useState(0)
+    const ref = React.useRef(count)
 
-	componentDidMount() {
-		// 拉取初始数据
-		// this.props.dispatch({
-		//   type: 'talk/init',
-		// });
-		// this.props.dispatch({
-		//   type: 'user/refresh',
-		// });
-	}
+    useEffect(() => {
+        console.log('更新了')
+    })
 
-	render() {
-		return <div>shuoshuo55999</div>
-	}
+    useEffect(() => {
+        ref.current = count
+        setTimeout(() => {
+            console.log(count)
+            console.log(ref.current, 'ref.current')
+        }, 1000)
+    })
+
+    useEffect(() => {
+        getTalks()
+    }, [])
+
+    const clickBtn = () => {
+        setName('2222')
+    }
+
+    return (
+        <div>
+            shuoshuo55999 <br />
+            user: {name}
+            age: {age}
+            count: {count}
+            <p>PreCount: {ref.current}</p>
+            <Button onClick={clickBtn}>name</Button>
+            <Button onClick={() => setAge(30)}>age</Button>
+            <Button onClick={() => setCount(prevCount => prevCount + 1)}>+</Button>
+        </div>
+    )
 }
 
-export default ShuoShuo
+export default connect(
+    null,
+    dispatch => ({
+        getTalks: () => dispatch(actionGetTalks()),
+    }),
+)(ShuoShuo)

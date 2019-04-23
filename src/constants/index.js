@@ -1,11 +1,14 @@
 export const ACTION = {
+    LODING: {
+        LODING_STATE: 'LODING/LODING_STATE',
+    },
     STAFF: {
         GET_STAFFS: 'STAFF/GET_STAFFS',
         SET_STAFFS: 'STAFF/SET_STAFFS',
         SET_STAFF_INFO: 'STAFF/SET_STAFF_INFO',
     },
-    LODING: {
-        LODING_STATE: 'LODING/LODING_STATE',
+    COMMUNITY: {
+        SET_TALKS: 'COMMUNITY/SET_TALKS',
     },
 }
 
@@ -17,6 +20,9 @@ export const ENDPOINT = {
         GET_STAFF_INFO: 'api/staff/getStaffInfo',
         EDIT_STAFF: 'api/staff/update',
         BATCH_DELETE_STAFFS: 'api/staff/batchDelByIds',
+    },
+    COMMUNITY: {
+        GET_TALKS: 'api/community/init',
     },
 }
 
@@ -36,7 +42,5 @@ export const ERROR_MESSAGE = {
     TOKEN_KICKED_OUT: '账号失效，请重新登陆',
 
     // 自定义错误
-    CONSTRAINT_ERROR_DELETE_CONFE: '该账号下存在会议，无法删除！',
-    CONSTRAINT_ERROR_DELETE_CONTRACT: '该合同下存在账号，无法删除！',
     NETWORK_TIMEOUT: '请求超时, 请稍后再试',
 }

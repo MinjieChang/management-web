@@ -65,11 +65,7 @@ function createFetch(fetch, { baseUrl, cookie, getToken, getDispatch }) {
                 .then(response => response)
             const response = await responsePromise
             const res = await response.json()
-            if (
-                res.errorCode &&
-                (res.errorCode === 'TOKEN_KICKED_OUT' ||
-                    res.errorCode === 'FORBIDDEN')
-            ) {
+            if (res.errorCode && (res.errorCode === 'TOKEN_KICKED_OUT' || res.errorCode === 'FORBIDDEN')) {
                 // const result = await getDispatch()(
                 //   alertError(ERROR_MESSAGE[res.errorCode]),
                 // );
@@ -95,7 +91,4 @@ function createFetch(fetch, { baseUrl, cookie, getToken, getDispatch }) {
     }
 }
 
-export {
-    createFetch,
-    ajax,
-}
+export { createFetch, ajax }
