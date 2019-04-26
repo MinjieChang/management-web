@@ -7,7 +7,7 @@ import log from './middleware/log'
 
 const clientFetch = createFetch(fetch, {
     getDispatch: () => store.dispatch,
-    baseUrl: '',
+    baseUrl: 'http://localhost:8000/',
 })
 
 const store = createStore(

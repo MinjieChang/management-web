@@ -1,40 +1,55 @@
 import isObject from 'lodash/isObject'
 import { message } from 'antd'
 import { ERROR_MESSAGE } from 'src/constants/index'
+import history from 'src/util/history'
+import { sleep } from 'src/util'
 import ClientError from './clientError'
 
+const server = {
+    webServer: 'http://localhost:8000/',
+    devServer: 'http://localhost:8080/',
+}
 class HttpRequest {
     constructor() {
         this.time = 10000
     }
 
-    get = url => {
-        const option = this.setOptions({ method: 'get' })
-        return this.createFetchFn(url, option)
+    setUrl = (url, options = {}) => {
+        const { withBaseUrl } = options
+        return withBaseUrl ? server.webServer + url : server.devServer + url
     }
 
-    post = (url, body) => {
+    get = (url, options) => {
+        const option = this.setOptions({ method: 'get' })
+        const fullUrl = this.setUrl(url, options)
+        return this.createFetchFn(fullUrl, option)
+    }
+
+    post = (url, body, options) => {
         const option = this.setOptions({
             method: 'post',
             body: isObject(body) ? JSON.stringify(body) : body,
         })
-        return this.createFetchFn(url, option)
+        const fullUrl = this.setUrl(url, options)
+        return this.createFetchFn(fullUrl, option)
     }
 
-    delete = (url, body) => {
+    delete = (url, body, options) => {
         const option = this.setOptions({
             method: 'delete',
             body: isObject(body) ? JSON.stringify(body) : body,
         })
-        return this.createFetchFn(url, option)
+        const fullUrl = this.setUrl(url, options)
+        return this.createFetchFn(fullUrl, option)
     }
 
-    put = (url, body) => {
+    put = (url, body, options) => {
         const option = this.setOptions({
             method: 'put',
             body: isObject(body) ? JSON.stringify(body) : body,
         })
-        return this.createFetchFn(url, option)
+        const fullUrl = this.setUrl(url, options)
+        return this.createFetchFn(fullUrl, option)
     }
 
     setOptions = (option, baseUrl = '') => {
@@ -64,11 +79,17 @@ class HttpRequest {
     }
 
     checkAuthority = response => {
-        const hasAuth = response.errorCode === 'TOKEN_KICKED_OUT' || response.errorCode === 'FORBIDDEN'
-        if (hasAuth) {
+        const hasNoAuth = response.errorCode === 'TOKEN_KICKED_OUT' || response.errorCode === 'FORBIDDEN'
+        if (hasNoAuth) {
             message.warning('登录无效')
+            return sleep(1000).then(() => history.push('/auth'))
         }
-        // TODO 此处需要重定向到登陆页
+        return response
+    }
+
+    checkErrorResponse = response => {
+        const { errorCode } = response
+        if (errorCode) throw response
         return response
     }
 
@@ -79,6 +100,7 @@ class HttpRequest {
                 .then(response => this.checkHttpStatus(response))
                 .then(response => response.json())
                 .then(response => this.checkAuthority(response))
+                .then(response => this.checkErrorResponse(response))
                 .then(response => resolve(response))
                 .catch(err => reject(err))
         }).catch(error => {

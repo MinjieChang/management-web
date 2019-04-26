@@ -1,3 +1,4 @@
+@import './layout.less';
 html,
 body,
 :global(#app) {
@@ -56,4 +57,13 @@ body,
 } */
 .anticon {
     color: #1890ff
+}
+.inheritHeight {
+    height: inherit;
+}
+.inheritWeight {
+    width: inherit;
+}
+.inheritColor {
+    color: inherit;
 }

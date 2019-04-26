@@ -2,23 +2,23 @@ import qs from 'query-string'
 import requestInstance from './httpRequest'
 
 class AJAX {
-    get = (url, query, ...options) => {
+    get = (url, query, options) => {
         // 拼接url地址
-        const queryUrl = this.stringifyQuery(url, query)
+        const queryUrl = this.stringifyQuery(url, query, options)
         // 设置请求头
         return requestInstance.get(queryUrl)
     }
 
-    post = (url, body, ...options) => {
-        return requestInstance.post(url, body)
+    post = (url, body, options) => {
+        return requestInstance.post(url, body, options)
     }
 
-    delete = (url, body, ...options) => {
-        return requestInstance.delete(url, body)
+    delete = (url, body, options) => {
+        return requestInstance.delete(url, body, options)
     }
 
-    put = (url, body, ...options) => {
-        return requestInstance.put(url, body)
+    put = (url, body, options) => {
+        return requestInstance.put(url, body, options)
     }
 
     stringifyQuery = (url, query) => {

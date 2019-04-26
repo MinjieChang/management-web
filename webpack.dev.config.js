@@ -28,6 +28,7 @@ const devConfig = {
         path: path.join(__dirname, './dist'),
         filename: '[name].[hash].js',
         chunkFilename: '[name].[chunkhash].js',
+        publicPath: '/',
     },
     module: {
         rules: [
@@ -95,6 +96,13 @@ const devConfig = {
                 target: 'http://localhost:8000',
                 pathRewrite: { '^/api': '/api' },
                 changeOrigin: true,
+                // bypass: req => {
+                //     if (req.headers && req.headers.referer)
+                //         req.headers.referer = req.headers.referer.replace(
+                //             /(.*\d+)(\/\w+)(.*)/g,
+                //             ($1, $2, $3) => $2 + $3,
+                //         )
+                // },
             },
         },
         historyApiFallback: true,

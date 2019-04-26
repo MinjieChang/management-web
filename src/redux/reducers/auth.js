@@ -2,15 +2,15 @@
 import { ACTION } from 'src/constants'
 
 const initState = {
-    talks: [],
+    account: [],
 }
 
 export default (state = initState, { type, payload }) => {
     switch (type) {
-        case ACTION.COMMUNITY.SET_TALKS:
+        case ACTION.AUTH.SET_ACCOUNT:
             return {
                 ...state,
-                talks: payload,
+                account: payload,
             }
         default:
             return state

@@ -9,16 +9,25 @@ export function getTalks() {
         namespace,
         promise: ajax => ajax.get(ENDPOINT.COMMUNITY.GET_TALKS),
         onSuccess: (dispatch, getState, response) => {
-            console.log(response, 99999)
-            /* 请求成功后执行的函数 */
-            // const { data } = response
-            // dispatch({
-            //     type: ACTION.COMMUNITY.SET_TALKS,
-            //     payload: data.staffs,
-            // })
-            // return { done: true }
+            const { data } = response
+            dispatch({
+                type: ACTION.COMMUNITY.SET_TALKS,
+                payload: data.talks,
+            })
         },
     }
 }
 
-export function getStaffs2() {}
+export function submitTalks(payload) {
+    return {
+        promise: ajax => ajax.post(ENDPOINT.COMMUNITY.SUBMIT_TALKS, payload),
+        onSuccess: (dispatch, getState, response) => {
+            const { data } = response
+            console.log(data, 'submit')
+            // dispatch({
+            //     type: ACTION.COMMUNITY.SET_TALKS,
+            //     payload: data.talks,
+            // })
+        },
+    }
+}

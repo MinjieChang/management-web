@@ -10,6 +10,9 @@ export const ACTION = {
     COMMUNITY: {
         SET_TALKS: 'COMMUNITY/SET_TALKS',
     },
+    AUTH: {
+        SET_ACCOUNT: 'AUTH/SET_ACCOUNT',
+    },
 }
 
 export const ENDPOINT = {
@@ -23,6 +26,11 @@ export const ENDPOINT = {
     },
     COMMUNITY: {
         GET_TALKS: 'api/community/init',
+        SUBMIT_TALKS: 'api/community/submitTalk',
+    },
+    AUTH: {
+        REGISTER: 'api/account/register',
+        LOGIN: 'api/account/login',
     },
 }
 

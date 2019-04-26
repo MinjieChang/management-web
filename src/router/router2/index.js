@@ -9,23 +9,28 @@ import browserHistory from 'src/util/history'
 
 import Layout from 'src/pages/Layout/Layout'
 import StaffTab from 'src/pages/StaffTab/StaffTab'
-import Community from 'src/pages/Community/Community'
+import CommunityLayout from 'src/pages/Community/ComLayout'
 import Register from 'src/pages/Register/Register'
+import AuthLayout from 'src/pages/Auth/AuthLayout'
 
 // 动态加载组件，目前和热更新合作不了，为了开发体验，先暂时不用动态加载， 打包的时候可以再改为动态加载
 import AsyncComponent from './AsyncComponent'
 
 const getRouter = () => (
-    <Router basename="/" history={browserHistory}>
-        <Layout>
-            <Switch>
-                <Route exact path="/" component={StaffTab} />
-                <Route path="/staff" component={StaffTab} />
-                <Route path="/community" component={Community} />
-                <Route path="/register" component={Register} />
-                <Redirect to="/" />
-            </Switch>
-        </Layout>
+    <Router history={browserHistory}>
+        <Switch>
+            <Route path="/auth" component={AuthLayout} />
+            <Route path="/">
+                <Layout>
+                    <Switch>
+                        <Route path="/staff" component={StaffTab} />
+                        <Route path="/community" component={CommunityLayout} />
+                        <Redirect to="/staff" />
+                    </Switch>
+                </Layout>
+            </Route>
+            <Redirect to="/" />
+        </Switch>
     </Router>
 )
 
