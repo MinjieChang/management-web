@@ -1,4 +1,5 @@
 import { compact, isEmpty } from 'lodash'
+import { server } from 'src/constants'
 
 export function merge(classes) {
     return compact(classes).join(' ')
@@ -61,3 +62,5 @@ export function isValidArray(arr) {
 export function randomNum(num) {
     return Math.floor(Math.random() * num)
 }
+
+export const getAvatar = path => `${server.webServer}/avatar/${path}`

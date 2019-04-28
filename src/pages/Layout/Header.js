@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Row, Col, Tooltip, Menu } from 'antd'
-import { randomNum } from 'src/util'
-import avatar from 'src/asserts/avatar/icon.jpg'
+import { randomNum, getAvatar } from 'src/util'
+import avatar from 'src/asserts/avatar/1.jpg'
 import { logOut as actionLogOut } from 'src/redux/actions/auth'
 import s from './Header.less'
 
@@ -43,7 +43,7 @@ const Header = props => {
         <div>
             <Row gutter={6}>
                 <Col span={16}>
-                    <Tooltip placement="topLeft" title={sentence.e}>
+                    <Tooltip placement="topLeft" title={sentence.e} overlayStyle={{ fontSize: 18 }}>
                         <h2 className="ellipsis pointer marginBottom5">{sentence.e}</h2>
                     </Tooltip>
                     <h4>{sentence.c}</h4>
@@ -54,7 +54,7 @@ const Header = props => {
                             title={
                                 <div className="layoutRow endCenter">
                                     <div className="marginRight10 pointer">{account.name}</div>
-                                    <img className={s.avatar} src={avatar} alt="" />
+                                    <img className={s.avatar} src={getAvatar(account.avatar || '0.jpg')} alt="" />
                                 </div>
                             }
                         >

@@ -1,14 +1,10 @@
 import isObject from 'lodash/isObject'
 import { message } from 'antd'
-import { ERROR_MESSAGE } from 'src/constants/index'
+import { ERROR_MESSAGE, server } from 'src/constants'
 import history from 'src/util/history'
 import { sleep } from 'src/util'
 import ClientError from './clientError'
 
-const server = {
-    webServer: 'http://localhost:8000/',
-    devServer: 'http://localhost:8080/',
-}
 class HttpRequest {
     constructor() {
         this.time = 10000
@@ -16,7 +12,7 @@ class HttpRequest {
 
     setUrl = (url, options = {}) => {
         const { withBaseUrl } = options
-        return withBaseUrl ? server.webServer + url : server.devServer + url
+        return withBaseUrl ? `${server.webServer}/${url}` : `${server.devServer}/${url}`
     }
 
     get = (url, options) => {

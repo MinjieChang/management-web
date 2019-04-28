@@ -54,3 +54,8 @@ export const ERROR_MESSAGE = {
     // 自定义错误
     NETWORK_TIMEOUT: '请求超时, 请稍后再试',
 }
+
+export const server = {
+    webServer: 'http://localhost:8000',
+    devServer: 'http://localhost:8080',
+}
