@@ -2,7 +2,7 @@
 import { ACTION } from 'src/constants'
 
 const initState = {
-    account: [],
+    account: {},
 }
 
 export default (state = initState, { type, payload }) => {

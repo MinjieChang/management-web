@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Input } from 'antd'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { Upload } from 'src/component'
 import { submitTalks as actionSubmitTalks } from 'src/redux/actions/community'
 import { getStaffs as actionGetStaffs } from 'src/redux/actions/staff'
@@ -29,7 +28,6 @@ const Talks = props => {
             <TextArea value={text} onChange={event => setText(event.target.value)} rows={3} className={s.textArea} />
             <Upload onChange={fils => setFileList(fils)} />
             <Button onClick={postTalks}>发表</Button>
-            <Link to={`${props.match.url}/child`}>下级</Link>
         </div>
     )
 }

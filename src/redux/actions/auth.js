@@ -1,7 +1,8 @@
+import { message } from 'antd'
 import { ENDPOINT, ACTION } from 'src/constants'
 import history from 'src/util/history'
 import { sleep } from 'src/util/index'
-import { message } from 'antd'
+import cookieService from 'src/util/cookie'
 
 export const namespace = 'register'
 
@@ -13,7 +14,7 @@ export function register(payload) {
             const { data } = response
             if (data) {
                 message.success('注册成功')
-                return sleep(1200).then(() => history.push('/auth'))
+                sleep(1000).then(() => history.push('/auth'))
             }
         },
     }
@@ -30,7 +31,24 @@ export function login(payload) {
                     type: ACTION.AUTH.SET_ACCOUNT,
                     payload: data,
                 })
-                return sleep(1200).then(() => history.push('/'))
+                cookieService.set(data._id)
+                sleep(1000).then(() => history.push('/'))
+            }
+        },
+    }
+}
+
+export function getAccountInfo(id) {
+    return {
+        promise: ajax => ajax.get(ENDPOINT.AUTH.GET_ACCOUNT_INFO, { id }),
+        onSuccess: (dispatch, getState, response) => {
+            const { data } = response
+            if (data) {
+                dispatch({
+                    type: ACTION.AUTH.SET_ACCOUNT,
+                    payload: data,
+                })
+                cookieService.set(data._id)
             }
         },
     }

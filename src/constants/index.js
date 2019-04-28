@@ -31,6 +31,7 @@ export const ENDPOINT = {
     AUTH: {
         REGISTER: 'api/account/register',
         LOGIN: 'api/account/login',
+        GET_ACCOUNT_INFO: 'api/account/accountInfo',
     },
 }
 

@@ -4,7 +4,7 @@ import { Button } from 'antd'
 import { connect } from 'react-redux'
 import propTypes from 'prop-types'
 import { getTalks as actionGetTalks } from 'src/redux/actions/community'
-import browserHistory from 'src/util/history'
+import history from 'src/util/history'
 import Talks from 'src/pages/Community/include/Talks'
 
 const ShuoShuo = ({ match, getTalks, community: { talks } }) => {
@@ -13,7 +13,7 @@ const ShuoShuo = ({ match, getTalks, community: { talks } }) => {
     }, [])
 
     const clickBtn = () => {
-        browserHistory.push(`${match.url}/postTalk`)
+        history.push(`${match.url}/postTalk`)
     }
 
     return (

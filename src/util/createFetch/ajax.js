@@ -4,9 +4,9 @@ import requestInstance from './httpRequest'
 class AJAX {
     get = (url, query, options) => {
         // 拼接url地址
-        const queryUrl = this.stringifyQuery(url, query, options)
+        const queryUrl = this.stringifyQuery(url, query)
         // 设置请求头
-        return requestInstance.get(queryUrl)
+        return requestInstance.get(queryUrl, options)
     }
 
     post = (url, body, options) => {

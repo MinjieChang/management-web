@@ -19,7 +19,6 @@ const Login = props => {
         e.preventDefault()
         validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values)
                 login(values)
             }
         })
