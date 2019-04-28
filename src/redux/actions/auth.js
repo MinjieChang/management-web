@@ -53,3 +53,17 @@ export function getAccountInfo(id) {
         },
     }
 }
+
+export function logOut() {
+    return {
+        promise: ajax => ajax.post(ENDPOINT.AUTH.LOGOUT),
+        onSuccess: (dispatch, getState, response) => {
+            const { data } = response
+            if (data) {
+                message.success('已退出！')
+                cookieService.clear()
+                sleep(1000).then(() => history.push('/auth'))
+            }
+        },
+    }
+}

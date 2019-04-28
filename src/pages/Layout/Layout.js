@@ -25,10 +25,12 @@ class AppLayout extends React.Component {
     }
 
     render() {
+        const day = '日一二三四五六'.split('')
+        const { auth: account } = this.props
         return (
             <div className={s.root}>
                 <div className={s.menu}>
-                    <div className={s.productName}>Hello 周{new Date().getDay() || 7}!</div>
+                    <div className={s.productName}>Hello 周{day[new Date().getDay()]}!</div>
                     <Menu />
                 </div>
                 <div className={s.content}>

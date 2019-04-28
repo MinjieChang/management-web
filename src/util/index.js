@@ -57,3 +57,7 @@ export function isValidArray(arr) {
     if (!isArray(arr)) return false
     return !isEmpty(arr)
 }
+
+export function randomNum(num) {
+    return Math.floor(Math.random() * num)
+}
