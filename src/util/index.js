@@ -64,3 +64,5 @@ export function randomNum(num) {
 }
 
 export const getAvatar = path => `${server.webServer}/avatar/${path}`
+
+export const getTalkImage = path => `${server.webServer}/upload/${path}`

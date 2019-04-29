@@ -9,17 +9,20 @@ class Spiner extends React.Component {
     }
 
     render() {
+        const { loading, children } = this.props
         return (
             <div>
-                <div className={s.bg}>
-                    <div className={s.imgBox}>
-                        <div className={s.surname}>
-                            <SpinerIcon />
+                {!!loading && (
+                    <div className={s.bg}>
+                        <div className={s.imgBox}>
+                            <div className={s.surname}>
+                                <SpinerIcon />
+                            </div>
+                            <span className={s.text}>加载中...</span>
                         </div>
-                        <span className={s.text}>加载中...</span>
                     </div>
-                </div>
-                {this.props.children}
+                )}
+                {children}
             </div>
         )
     }
@@ -27,16 +30,37 @@ class Spiner extends React.Component {
 
 export default function Render(loadingCheckFn) {
     return function Inner(Component) {
-        return class InnerCom extends Component {
+        return class InnerCom extends React.Component {
             constructor(props) {
                 super(props)
+                this.state = {
+                    showLoading: false,
+                }
             }
 
+            // componentWillMount() {
+            //     console.log(this.props, 666666)
+            //     const showLoading = loadingCheckFn(this.props)
+            //     this.setState({
+            //         showLoading,
+            //     })
+            // }
+
             render() {
-                if (loadingCheckFn(this.props)) {
-                    return <Spiner>{super.render()}</Spiner>
-                }
-                return super.render()
+                // if (loadingCheckFn(this.props)) {
+                //     return (
+                //         <Spiner>
+                //             <Component {...this.props} />
+                //         </Spiner>
+                //     )
+                // }
+                const showLoading = loadingCheckFn(this.props)
+                // const { showLoading } = this.state
+                return (
+                    <Spiner loading={showLoading}>
+                        <Component {...this.props} />
+                    </Spiner>
+                )
             }
         }
     }

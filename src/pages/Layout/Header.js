@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Row, Col, Tooltip, Menu } from 'antd'
 import { randomNum, getAvatar } from 'src/util'
-import avatar from 'src/asserts/avatar/1.jpg'
 import { logOut as actionLogOut } from 'src/redux/actions/auth'
 import s from './Header.less'
 

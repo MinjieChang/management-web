@@ -23,6 +23,12 @@ body,
     background: #ccc;
     display: inline-block;
 }
+.horizon {
+    height: 0.6px;
+    width: 100%;
+    background: #eee;
+    display: inline-block;
+}
 .pointer {
     cursor: pointer;
 }
@@ -59,6 +65,9 @@ body,
 }
 
 /* 布局 */
+.positionRelative {
+    position: relative;
+}
 .textAlignLeft {
     text-align: left
 }

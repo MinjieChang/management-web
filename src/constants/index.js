@@ -26,7 +26,8 @@ export const ENDPOINT = {
     },
     COMMUNITY: {
         GET_TALKS: 'api/community/init',
-        SUBMIT_TALKS: 'api/community/submitTalk',
+        SUBMIT_TALK: 'api/community/submitTalk',
+        DELETE_TALK: 'api/community/removeTalk',
     },
     AUTH: {
         REGISTER: 'api/account/register',

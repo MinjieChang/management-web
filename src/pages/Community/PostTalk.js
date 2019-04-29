@@ -16,8 +16,12 @@ const Talks = props => {
         props.getStaffs()
     }, [])
     const postTalks = () => {
-        const { submitTalks } = props
+        const {
+            submitTalks,
+            auth: { account },
+        } = props
         const payload = {
+            userId: account._id,
             text,
             pathArr: fileList.map(file => file.response && file.response.data.picPath),
         }
@@ -33,7 +37,9 @@ const Talks = props => {
 }
 
 export default connect(
-    null,
+    state => ({
+        auth: state.auth,
+    }),
     dispatch => ({
         getStaffs() {
             return dispatch(actionGetStaffs())
