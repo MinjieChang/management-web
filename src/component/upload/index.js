@@ -2,8 +2,10 @@
 import React, { useEffect, useState } from 'react'
 import { Upload, Modal, Icon, message } from 'antd'
 import { server } from 'src/constants'
+import { getCurrentApiOrigin } from 'src/util'
 
-const uploadUrl = `${server.webServer}/api/community/uploadPic`
+const origin = getCurrentApiOrigin()
+const uploadUrl = `${origin}/api/community/uploadPic`
 const imgTypes = ['image/png', 'image/jpeg']
 const uploadButton = (
     <div>

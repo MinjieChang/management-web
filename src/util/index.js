@@ -63,6 +63,22 @@ export function randomNum(num) {
     return Math.floor(Math.random() * num)
 }
 
-export const getAvatar = path => `${server.webServer}/avatar/${path}`
+export const isProduction = () => process.env.NODE_ENV === 'production'
 
-export const getTalkImage = path => `${server.webServer}/upload/${path}`
+export const getCurrentApiOrigin = () => {
+    const production = isProduction()
+    const { origin } = window.location
+    return production ? origin : server.devServer
+}
+
+export const getAvatar = path => {
+    const production = isProduction()
+    const { origin } = window.location
+    return `${production ? origin : server.webServer}/avatar/${path}`
+}
+
+export const getTalkImage = path => {
+    const production = isProduction()
+    const { origin } = window.location
+    return `${production ? origin : server.webServer}/upload/${path}`
+}

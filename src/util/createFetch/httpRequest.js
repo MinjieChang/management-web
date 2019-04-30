@@ -1,11 +1,10 @@
 import isObject from 'lodash/isObject'
 import { message } from 'antd'
-import { ERROR_MESSAGE, server } from 'src/constants'
+import { ERROR_MESSAGE } from 'src/constants'
 import history from 'src/util/history'
-import { sleep } from 'src/util'
+import { sleep, getCurrentApiOrigin } from 'src/util'
 import ClientError from './clientError'
 
-const isProduction = process.env.NODE_ENV === 'production'
 class HttpRequest {
     constructor() {
         this.time = 10000
@@ -13,10 +12,12 @@ class HttpRequest {
 
     setUrl = (url, options = {}) => {
         const { withBaseUrl } = options
-        if(isProduction) {
-            return `${location.origin}/${url}`
-        }
-        return withBaseUrl ? `${server.webServer}/${url}` : `${server.devServer}/${url}`
+        const origin = getCurrentApiOrigin()
+        return `${origin}/${url}`
+        // if(isProduction) {
+        //     return `${location.origin}/${url}`
+        // }
+        // return withBaseUrl ? `${server.webServer}/${url}` : `${server.devServer}/${url}`
     }
 
     get = (url, options) => {
