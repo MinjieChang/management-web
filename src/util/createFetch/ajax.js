@@ -29,7 +29,7 @@ class AJAX {
             return url.slice(-1) === '?' ? `${url}${queryString}` : `${url}&${queryString}`
         }
 
-        return `${url}?${queryString || ''}`
+        return queryString ? `${url}?${queryString}` : url
     }
 }
 

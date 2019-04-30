@@ -5,6 +5,7 @@ import history from 'src/util/history'
 import { sleep } from 'src/util'
 import ClientError from './clientError'
 
+const isProduction = process.env.NODE_ENV === 'production'
 class HttpRequest {
     constructor() {
         this.time = 10000
@@ -12,6 +13,9 @@ class HttpRequest {
 
     setUrl = (url, options = {}) => {
         const { withBaseUrl } = options
+        if(isProduction) {
+            return `${location.origin}/${url}`
+        }
         return withBaseUrl ? `${server.webServer}/${url}` : `${server.devServer}/${url}`
     }
 
