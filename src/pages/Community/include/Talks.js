@@ -3,7 +3,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { message } from 'antd'
 import { Talk } from 'src/component'
-import { deleteTalk as actionDeleteTalk } from 'src/redux/actions/community'
+import {
+    deleteTalk as actionDeleteTalk,
+    collectTalk as actionCollectTalk,
+    likeTalk as actionLikeTalk,
+} from 'src/redux/actions/community'
 import s from 'src/pages/Community/Community.less'
 
 const Talks = props => {
@@ -11,13 +15,18 @@ const Talks = props => {
         talks,
         account: { _id: accountId, isVip },
         deleteTalk,
+        collectTalk,
+        likeTalk,
     } = props
     const handleDelete = (authorId, talkId, pathArr) => {
         if (isVip || authorId === accountId) return deleteTalk({ id: talkId, pathArr })
         return message.error('你无权限删除此微博！')
     }
-    const handleCollect = id => {}
-    const handleStar = id => {}
+    // 收藏
+    const handleCollect = ({ talkId, status }) => collectTalk({ talkId, status, accountId })
+    // 点赞
+    const handleStar = ({ talkId, status }) => likeTalk({ talkId, status, accountId })
+    // 评论
     const handleComment = id => {}
     const talkProps = { handleDelete, handleCollect, handleStar, handleComment }
     return (
@@ -29,11 +38,13 @@ const Talks = props => {
 }
 
 const mapState = state => ({})
-const mapProps = dispatch => ({
+const mapDispatch = dispatch => ({
     deleteTalk: value => dispatch(actionDeleteTalk(value)),
+    collectTalk: value => dispatch(actionCollectTalk(value)),
+    likeTalk: value => dispatch(actionLikeTalk(value)),
 })
 
 export default connect(
     mapState,
-    mapProps,
+    mapDispatch,
 )(Talks)

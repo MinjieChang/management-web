@@ -17,6 +17,9 @@ const Talk = props => {
         pv,
         createdAt,
         _id: talkId,
+        liked,
+        collected,
+        likedAmount,
     } = talk
     useEffect(() => {
         const date = new Date(createdAt)
@@ -76,9 +79,9 @@ const Talk = props => {
             </div>
             <div className="horizon" />
             <Row className={s.footer}>
-                <Col span={8} className={s.perItem} onClick={() => handleCollect()}>
-                    <Icon type="star" />
-                    <span>收藏</span>
+                <Col span={8} className={s.perItem} onClick={() => handleCollect({ talkId, status: !collected })}>
+                    <Icon type="star" theme={collected ? 'filled' : ''} />
+                    <span>{collected ? '已收藏' : '收藏'}</span>
                 </Col>
                 <Col span={1} className="divider" style={{ backgroundColor: '#eee', height: '16px' }} />
                 <Col span={8} className={s.perItem} onClick={() => handleComment()}>
@@ -86,11 +89,12 @@ const Talk = props => {
                     <span>{pv}</span>
                 </Col>
                 <Col span={1} className="divider" style={{ backgroundColor: '#eee', height: '16px' }} />
-                <Col span={8} className={s.perItem} onClick={() => handleStar()}>
-                    <Icon type="star" />
-                    <span>{pv}</span>
+                <Col span={8} className={s.perItem} onClick={() => handleStar({ talkId, status: !liked })}>
+                    <Icon type="like" theme={liked ? 'filled' : ''} />
+                    <span>{likedAmount}</span>
                 </Col>
             </Row>
+            {/* <div>评论部分</div> */}
             <Modal title="预览" visible={visible} onCancel={() => setVisible(false)} onOk={() => setVisible(false)}>
                 <div className="layoutColumn startStart">
                     <img className={s.previewImg} src={getTalkImage(curImage)} alt="" />

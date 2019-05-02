@@ -10,9 +10,10 @@ import history from 'src/util/history'
 import Talks from 'src/pages/Community/include/Talks'
 import { withSpin } from 'src/hoc'
 
-const Community = ({ match, getTalks, community: { talks } }) => {
+const Community = ({ match, getTalks, community: { talks }, auth: { account } }) => {
     useEffect(() => {
-        getTalks()
+        const { _id } = account
+        getTalks({ accountId: _id })
     }, [])
 
     const clickBtn = () => {
@@ -34,14 +35,16 @@ const Community = ({ match, getTalks, community: { talks } }) => {
 Community.propTypes = {
     getTalks: propTypes.func.isRequired,
     community: propTypes.shape({ talks: propTypes.any }).isRequired,
+    auth: propTypes.shape({ account: propTypes.any }).isRequired,
 }
 
 const mapState = state => ({
     loading: state.loading,
+    auth: state.auth,
     community: state.community,
 })
 const mapDispatch = dispatch => ({
-    getTalks: () => dispatch(actionGetTalks()),
+    getTalks: value => dispatch(actionGetTalks(value)),
 })
 
 export default compose(

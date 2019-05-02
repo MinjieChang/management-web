@@ -5,10 +5,10 @@ import { sleep } from 'src/util'
 
 export const namespace = 'GET_TALKS'
 
-export function getTalks() {
+export function getTalks(payload) {
     return {
         namespace,
-        promise: ajax => ajax.get(ENDPOINT.COMMUNITY.GET_TALKS),
+        promise: ajax => ajax.get(ENDPOINT.COMMUNITY.GET_TALKS, payload),
         onSuccess: (dispatch, getState, response) => {
             const { data } = response
             dispatch({
@@ -40,6 +40,34 @@ export function deleteTalk(payload) {
             if (data) {
                 message.success('删除成功！')
                 dispatch(getTalks())
+            }
+        },
+    }
+}
+
+export function collectTalk(payload) {
+    return {
+        promise: ajax => ajax.post(ENDPOINT.COMMUNITY.COLLECT_TALK, payload),
+        onSuccess: (dispatch, getState, response) => {
+            const { data } = response
+            if (data) {
+                const { accountId, status } = payload
+                message.success(`${status ? '收藏' : '取消'}成功！`)
+                dispatch(getTalks({ accountId }))
+            }
+        },
+    }
+}
+
+export function likeTalk(payload) {
+    return {
+        promise: ajax => ajax.post(ENDPOINT.COMMUNITY.LIKE_TALK, payload),
+        onSuccess: (dispatch, getState, response) => {
+            const { data } = response
+            if (data) {
+                const { accountId, status } = payload
+                message.success(`${status ? '点赞' : '取消'}成功！`)
+                dispatch(getTalks({ accountId }))
             }
         },
     }
