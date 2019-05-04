@@ -9,6 +9,7 @@ export const ACTION = {
     },
     COMMUNITY: {
         SET_TALKS: 'COMMUNITY/SET_TALKS',
+        SET_COMMENTS: 'COMMUNITY/SET_COMMENTS',
     },
     AUTH: {
         SET_ACCOUNT: 'AUTH/SET_ACCOUNT',
@@ -30,6 +31,8 @@ export const ENDPOINT = {
         DELETE_TALK: 'api/community/removeTalk',
         COLLECT_TALK: 'api/community/collectTalk',
         LIKE_TALK: 'api/community/likeTalk',
+        COMMENT_TALK: 'api/community/commentTalk',
+        GET_TALK_COMMENTS: 'api/community/getTalkComments',
     },
     AUTH: {
         REGISTER: 'api/account/register',
@@ -47,9 +50,6 @@ export const ERROR_MESSAGE = {
     INVALID_PASSCODE: 'passcode错误',
     PRISTINE_PASSWORD_ERROR: '请更改初始密码',
     DUP: '该资源已存在',
-    NO_MEETING: '会议还未开始',
-    NO_HOST: '主持人必须在线',
-    CONSTRAINT_ERROR: '操作前请删除该资源下的所有资源',
     SERVER_ERROR: '服务器错误',
     UNKNOWN: '未知错误，请联系管理员',
     TOKEN_KICKED_OUT: '账号失效，请重新登陆',

@@ -72,3 +72,34 @@ export function likeTalk(payload) {
         },
     }
 }
+
+export function getTalkCommentsById(payload) {
+    return {
+        promise: ajax => ajax.get(ENDPOINT.COMMUNITY.GET_TALK_COMMENTS, payload),
+        onSuccess: (dispatch, getState, response) => {
+            const { data } = response
+            if (data) {
+                const { comments } = data
+                const { talkId } = payload
+                dispatch({
+                    type: ACTION.COMMUNITY.SET_COMMENTS,
+                    payload: { talkId, comments },
+                })
+            }
+        },
+    }
+}
+
+export function commentTalk(payload) {
+    return {
+        promise: ajax => ajax.post(ENDPOINT.COMMUNITY.COMMENT_TALK, payload),
+        onSuccess: (dispatch, getState, response) => {
+            const { data } = response
+            if (data) {
+                message.success('评论成功！')
+                const { talkId } = payload
+                dispatch(getTalkCommentsById({ talkId }))
+            }
+        },
+    }
+}
