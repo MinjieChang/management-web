@@ -9,6 +9,7 @@ export const ACTION = {
     },
     COMMUNITY: {
         SET_TALKS: 'COMMUNITY/SET_TALKS',
+        SET_COMMENTS: 'COMMUNITY/SET_COMMENTS',
     },
     AUTH: {
         SET_ACCOUNT: 'AUTH/SET_ACCOUNT',
@@ -30,6 +31,8 @@ export const ENDPOINT = {
         DELETE_TALK: 'api/community/removeTalk',
         COLLECT_TALK: 'api/community/collectTalk',
         LIKE_TALK: 'api/community/likeTalk',
+        COMMENT_TALK: 'api/community/commentTalk',
+        GET_TALK_COMMENTS: 'api/community/getTalkComments',
     },
     AUTH: {
         REGISTER: 'api/account/register',

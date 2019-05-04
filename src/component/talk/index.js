@@ -1,15 +1,17 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { Modal, Icon, Row, Col, Dropdown, Menu } from 'antd'
 import { getAvatar, getTalkImage, merge } from 'src/util'
+import Comment from './comment'
 import s from './index.less'
 
 const Talk = props => {
     const [visible, setVisible] = useState(false)
     const [curImage, setCurImage] = useState('')
     const [createDate, setCreateDate] = useState({})
-    const { talk, handleDelete, handleCollect, handleStar, handleComment } = props
+    const [showComments, setShowComments] = useState(false)
+    const { talk, comments, handleDelete, handleCollect, handleStar, handleComment, account, getTalkComments } = props
     const {
         author: { avatar, email, name, _id: authorId },
         pathArr = [],
@@ -20,6 +22,7 @@ const Talk = props => {
         liked,
         collected,
         likedAmount,
+        commentsAmount,
     } = talk
     useEffect(() => {
         const date = new Date(createdAt)
@@ -43,6 +46,13 @@ const Talk = props => {
             </Menu.Item>
         </Menu>
     )
+
+    const onCommentClick = () => {
+        setShowComments(!showComments)
+        if (!showComments) {
+            getTalkComments(talkId)
+        }
+    }
 
     const { month, day, hour, minute } = createDate
     return (
@@ -84,9 +94,9 @@ const Talk = props => {
                     <span>{collected ? '已收藏' : '收藏'}</span>
                 </Col>
                 <Col span={1} className="divider" style={{ backgroundColor: '#eee', height: '16px' }} />
-                <Col span={8} className={s.perItem} onClick={() => handleComment()}>
+                <Col span={8} className={s.perItem} onClick={() => onCommentClick()}>
                     <Icon type="message" />
-                    <span>{pv}</span>
+                    <span>{comments.length || commentsAmount}</span>
                 </Col>
                 <Col span={1} className="divider" style={{ backgroundColor: '#eee', height: '16px' }} />
                 <Col span={8} className={s.perItem} onClick={() => handleStar({ talkId, status: !liked })}>
@@ -94,7 +104,9 @@ const Talk = props => {
                     <span>{likedAmount}</span>
                 </Col>
             </Row>
-            {/* <div>评论部分</div> */}
+            {!!showComments && (
+                <Comment account={account} talk={talk} comments={comments} submitComment={handleComment} />
+            )}
             <Modal title="预览" visible={visible} onCancel={() => setVisible(false)} onOk={() => setVisible(false)}>
                 <div className="layoutColumn startStart">
                     <img className={s.previewImg} src={getTalkImage(curImage)} alt="" />
@@ -123,10 +135,13 @@ Talk.propTypes = {
         text: PropTypes.string,
         pv: PropTypes.number,
     }).isRequired,
+    comments: PropTypes.arrayOf(PropTypes.object).isRequired,
     handleDelete: PropTypes.func.isRequired,
     handleCollect: PropTypes.func.isRequired,
     handleStar: PropTypes.func.isRequired,
     handleComment: PropTypes.func.isRequired,
+    getTalkComments: PropTypes.func.isRequired,
+    account: PropTypes.shape({ avatar: PropTypes.string, _id: PropTypes.string }).isRequired,
 }
 
 export default Talk

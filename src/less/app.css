@@ -60,6 +60,9 @@ body,
 }
 
 /* 字体 */
+.fontSize12 {
+    font-size: 12px
+}
 .fontSize20 {
     font-size: 20px
 }
