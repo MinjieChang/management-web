@@ -46,11 +46,28 @@ const Talk = props => {
             </Menu.Item>
         </Menu>
     )
-
+    // 点击评论
     const onCommentClick = () => {
         setShowComments(!showComments)
         if (!showComments) {
             getTalkComments(talkId)
+        }
+    }
+    // 回复评论
+    const replyComment = value => {
+        const { replyComment: actionReplyComment } = props
+        const { comment, replyContent, beReplierId } = value
+        const { _id: commentId } = comment
+        const { _id: accountId } = account
+        /**
+         * replyContent: 回复的评论的内容
+         * commentId: 哪条评论
+         * accountId：当前账号，也是回复人
+         * beReplierId: 被回复人，可能是评论人，也可能是回复人
+         * talkId: 哪条说说
+         */
+        if (actionReplyComment) {
+            actionReplyComment({ talkId, commentId, accountId, replyContent, beReplierId })
         }
     }
 
@@ -105,7 +122,13 @@ const Talk = props => {
                 </Col>
             </Row>
             {!!showComments && (
-                <Comment account={account} talk={talk} comments={comments} submitComment={handleComment} />
+                <Comment
+                    account={account}
+                    talk={talk}
+                    comments={comments}
+                    submitComment={handleComment}
+                    replyComment={replyComment}
+                />
             )}
             <Modal title="预览" visible={visible} onCancel={() => setVisible(false)} onOk={() => setVisible(false)}>
                 <div className="layoutColumn startStart">
@@ -141,6 +164,7 @@ Talk.propTypes = {
     handleStar: PropTypes.func.isRequired,
     handleComment: PropTypes.func.isRequired,
     getTalkComments: PropTypes.func.isRequired,
+    replyComment: PropTypes.func.isRequired,
     account: PropTypes.shape({ avatar: PropTypes.string, _id: PropTypes.string }).isRequired,
 }
 

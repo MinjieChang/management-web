@@ -12,6 +12,7 @@ const Comment = props => {
     const { account, talk, submitComment, comments } = props
     const { _id: accountId, avatar } = account
     const { _id: talkId } = talk
+    // 点击评论，展开/折起评论
     const handleComment = () => {
         const inputVal = inputEl.current.value
         if (!inputVal) {
@@ -27,6 +28,11 @@ const Comment = props => {
             inputEl.current.value = ''
             return submitComment(payload)
         }
+    }
+    // 回复评论
+    const replyComment = val => {
+        const { replyComment: actionReplyComment } = props
+        if (actionReplyComment) actionReplyComment(val)
     }
     return (
         <div className={s.root}>
@@ -50,7 +56,9 @@ const Comment = props => {
             <div className={s.comments}>
                 {comments &&
                     !!comments.length &&
-                    comments.map(comment => <PerComment key={comment._id} comment={comment} />)}
+                    comments.map(comment => (
+                        <PerComment replyComment={replyComment} key={comment._id} comment={comment} />
+                    ))}
             </div>
         </div>
     )
@@ -61,6 +69,7 @@ Comment.propTypes = {
     talk: PropTypes.shape({ _id: PropTypes.string }).isRequired,
     comments: PropTypes.arrayOf(PropTypes.object).isRequired,
     submitComment: PropTypes.func.isRequired,
+    replyComment: PropTypes.func.isRequired,
 }
 
 export default Comment

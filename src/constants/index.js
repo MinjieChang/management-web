@@ -33,6 +33,7 @@ export const ENDPOINT = {
         LIKE_TALK: 'api/community/likeTalk',
         COMMENT_TALK: 'api/community/commentTalk',
         GET_TALK_COMMENTS: 'api/community/getTalkComments',
+        REPLY_COMMENTS: 'api/community/replyComment',
     },
     AUTH: {
         REGISTER: 'api/account/register',

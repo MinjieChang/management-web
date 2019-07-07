@@ -103,3 +103,18 @@ export function commentTalk(payload) {
         },
     }
 }
+
+// 回复评论
+export function replyComment(payload) {
+    return {
+        promise: ajax => ajax.post(ENDPOINT.COMMUNITY.REPLY_COMMENTS, payload),
+        onSuccess: (dispatch, getState, response) => {
+            const { data } = response
+            if (data) {
+                message.success('回复成功！')
+                // const { talkId } = payload
+                // dispatch(getTalkCommentsById({ talkId }))
+            }
+        },
+    }
+}

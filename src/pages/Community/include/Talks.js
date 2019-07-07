@@ -9,6 +9,7 @@ import {
     likeTalk as actionLikeTalk,
     commentTalk as actionCommentTalk,
     getTalkCommentsById as actionGetTalkCommentsById,
+    replyComment as actionReplyComment,
 } from 'src/redux/actions/community'
 import s from 'src/pages/Community/Community.less'
 
@@ -21,6 +22,7 @@ const Talks = props => {
         collectTalk,
         likeTalk,
         commentTalk,
+        replyComment,
         getTalkCommentsById,
     } = props
     const handleDelete = (authorId, talkId, pathArr) => {
@@ -35,8 +37,18 @@ const Talks = props => {
     const handleComment = ({ talkId, content, commenterId }) => commentTalk({ talkId, content, commenterId })
     // 获取评论
     const getTalkComments = talkId => getTalkCommentsById({ talkId })
+    // 回复评论
+    const replyCommentLocal = ({ talkId, commentId, replyContent, beReplierId }) =>
+        replyComment({ talkId, commentId, accountId, replyContent, beReplierId })
 
-    const talkProps = { handleDelete, handleCollect, handleStar, handleComment, getTalkComments }
+    const talkProps = {
+        handleDelete,
+        handleCollect,
+        handleStar,
+        handleComment,
+        getTalkComments,
+        replyComment: replyCommentLocal,
+    }
     return (
         <div className="layoutColumn startCenter">
             {!!talks.length &&
@@ -61,6 +73,7 @@ const mapDispatch = dispatch => ({
     likeTalk: value => dispatch(actionLikeTalk(value)),
     commentTalk: value => dispatch(actionCommentTalk(value)),
     getTalkCommentsById: value => dispatch(actionGetTalkCommentsById(value)),
+    replyComment: value => dispatch(actionReplyComment(value)),
 })
 
 export default connect(
