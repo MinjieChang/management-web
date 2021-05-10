@@ -12,4 +12,6 @@
 - 由于heroku网站的限制，导致社区模块上传的图片无法正常显示！
 - 访问该网站需要科学上网
 
+## 技术栈
+
 react + redux + antd + webpack + axios
